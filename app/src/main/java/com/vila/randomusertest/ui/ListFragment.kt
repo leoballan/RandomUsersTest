@@ -103,6 +103,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                             viewmodel.resetUsersStateFlow()
                             Log.d("webservice", " error......${response.exception}")
                         }
+                        else ->{}
                     }
                 }
             }
