@@ -19,6 +19,8 @@
 
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
+    that api key is not valid any more
     -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCrkK4sA2ibLfjrwXhvhibE788Lk-qx9yk</string>
+
 </resources>

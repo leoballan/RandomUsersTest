@@ -50,26 +50,28 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     }
 
     private fun initListeners() {
-        binding?.btRefresh?.setOnClickListener {
-            viewmodel.fetchUserWithStateFlow()
-        }
-
-        binding?.etSearch?.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        with(binding!!){
+            this.btRefresh.setOnClickListener {
+                viewmodel.fetchUserWithStateFlow()
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun afterTextChanged(text: Editable?) {
-                if (text.toString().length>4){
-                    viewmodel.filterList(text.toString())
-                }else if(text.toString().isEmpty()){
-                    viewmodel.resetFilter()
+            this.etSearch.addTextChangedListener(object : TextWatcher{
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 }
-            }
-        })
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+
+                override fun afterTextChanged(text: Editable?) {
+                    if (text.toString().length>2){
+                        viewmodel.filterList(text.toString())
+                    }else if (text.toString().length == 2){
+                        viewmodel.resetFilter()
+                    }
+                }
+            })
+        }
     }
 
     private fun initObservers() {
