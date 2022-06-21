@@ -1,6 +1,5 @@
 package com.vila.randomusertest.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vila.randomusertest.domain.models.*
@@ -20,9 +19,9 @@ class MainViewModel @Inject constructor(private val getUsersUseCase: GetUsersUse
         fetchUserWithStateFlow()
     }
 
-    private val _usersStateFlow =
+    private val _usersSharedFlow =
         MutableStateFlow<WebResponse<List<User>>>(WebResponse.Init())
-    val usersStateFlow = _usersStateFlow.asSharedFlow()
+    val usersSharedFlow = _usersSharedFlow.asSharedFlow()
 
     private val _selectedUser = MutableStateFlow(User())
     val selectedUser = _selectedUser.asStateFlow()
@@ -34,6 +33,7 @@ class MainViewModel @Inject constructor(private val getUsersUseCase: GetUsersUse
     val userList = _userList.asStateFlow()
 
     private var listTemp = mutableListOf<User>()
+
 
     fun setProgressState(state:Boolean){
         viewModelScope.launch {
@@ -47,12 +47,8 @@ class MainViewModel @Inject constructor(private val getUsersUseCase: GetUsersUse
 
     fun fetchUserWithStateFlow(){
         viewModelScope.launch {
-            getUsersUseCase.invoke().collect {_usersStateFlow.value = it}
+            getUsersUseCase.invoke().collect {_usersSharedFlow.emit(it)}
         }
-    }
-
-    fun resetUsersStateFlow(){
-        _usersStateFlow.value = WebResponse.Init()
     }
 
     fun filterList(text: String) {

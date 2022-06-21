@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.vila.randomusertest.R
 import com.vila.randomusertest.databinding.ItemLayoutBinding
 import com.vila.randomusertest.domain.models.User
 
@@ -40,6 +41,7 @@ class UserAdapter (val action :(User)->Unit):ListAdapter<User,UserAdapter.Holder
                 Glide.with(binding.root.context)
                     .load(user.picture.thumbnail)
                     .circleCrop()
+                    .placeholder(R.drawable.ic_baseline_tag_faces_24)
                     .into(this.image)
             }
         }

@@ -78,7 +78,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewmodel.usersStateFlow.collect { response ->
+                viewmodel.usersSharedFlow.collect { response ->
                     when (response) {
                         is WebResponse.Loading -> {
                             viewmodel.setProgressState(true)
@@ -93,7 +93,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                             ).show()
                             Log.d("webservice", " Success..............")
                             viewmodel.setListTemp(response.data)
-                            viewmodel.resetUsersStateFlow()
                         }
                         is WebResponse.Error -> {
                             viewmodel.setProgressState(false)
@@ -102,7 +101,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                                 R.string.Error_loading_data,
                                 Toast.LENGTH_SHORT
                             ).show()
-                            viewmodel.resetUsersStateFlow()
                             Log.d("webservice", " error......${response.exception}")
                         }
                         else ->{}

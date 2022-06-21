@@ -55,6 +55,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         Glide.with(requireActivity())
                             .load(user.picture.large)
                             .centerInside()
+                            .placeholder(R.drawable.ic_baseline_tag_faces_24)
                             .into(it.image)
                     }
                 }
