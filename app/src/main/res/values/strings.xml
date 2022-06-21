@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">RandomUserTest</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Error_loading_data">Ha ocurrido un error al cargar los datos</string>
+    <string name="Success_loading_data">Se han cargado los usuarios exitosamente</string>
+    <string name="Map_message">Estoy aqui</string>
+    <string name="SearchEditext_text">Buscar</string>
+
+</resources>
